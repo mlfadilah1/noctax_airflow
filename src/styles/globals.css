@@ -1,0 +1,199 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ============================================================
+   NOCTAX / TECHNICAL CYAN — design tokens
+   Light = "clean engineering documentation"
+   Dark  = "technical workspace at night" (graphite, never #000)
+   ============================================================ */
+
+:root {
+  --background: #eceeec;
+  --foreground: #1b2126;
+  --surface: #f5f6f4;
+  --surface-muted: #dfe4e3;
+  --surface-inset: #e2e6e5;
+  --border: #c6cfcd;
+  --border-strong: #a9b6b4;
+  --primary: #1d4e9e;
+  --primary-deep: #163a6e;
+  --primary-steel: #4f7396;
+  --primary-foreground: #f4f7fa;
+  --accent: #0a7f99;
+  --accent-bright: #0899bb;
+  --accent-foreground: #062b34;
+  --accent-track: #b9d9de;
+  --muted: #5b656b;
+  --muted-foreground: #6b767c;
+  --success: #1f7a4d;
+  --grid-line: rgba(29, 78, 158, 0.09);
+  --tick: #9aa7a5;
+  --shadow: 0 1px 2px rgba(22, 30, 36, 0.08), 0 8px 28px -18px rgba(22, 58, 110, 0.35);
+
+  --radius-s: 2px;
+  --radius-m: 6px;
+  --radius-l: 10px;
+
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-tech: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+}
+
+.dark {
+  --background: #16191d;
+  --foreground: #e6eaec;
+  --surface: #1d2228;
+  --surface-muted: #242b32;
+  --surface-inset: #14181c;
+  --border: #2d343c;
+  --border-strong: #3d4650;
+  --primary: #6f9bd8;
+  --primary-deep: #3d64a3;
+  --primary-steel: #7d95ad;
+  --primary-foreground: #0e141b;
+  --accent: #38d3ec;
+  --accent-bright: #4fdcf2;
+  --accent-foreground: #062b34;
+  --accent-track: #1e3a42;
+  --muted: #9aa6ad;
+  --muted-foreground: #7d8a91;
+  --success: #4cc38a;
+  --grid-line: rgba(111, 155, 216, 0.1);
+  --tick: #4a545c;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 16px 40px -24px rgba(0, 0, 0, 0.7);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-surface-inset: var(--surface-inset);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-primary: var(--primary);
+  --color-primary-deep: var(--primary-deep);
+  --color-primary-steel: var(--primary-steel);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent-track: var(--accent-track);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-success: var(--success);
+  --color-grid-line: var(--grid-line);
+  --color-tick: var(--tick);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-tech: var(--font-tech);
+
+  --radius-s: var(--radius-s);
+  --radius-m: var(--radius-m);
+  --radius-l: var(--radius-l);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.font-tech {
+  font-family: var(--font-tech);
+  letter-spacing: 0.08em;
+}
+
+/* Controlled fluid type */
+.display-hero {
+  font-size: clamp(2.4rem, 5.4vw + 1rem, 4.6rem);
+  line-height: 1.02;
+}
+.display-section {
+  font-size: clamp(1.65rem, 2.6vw + 1rem, 2.6rem);
+  line-height: 1.1;
+}
+
+/* Subtle technical grid backdrop */
+.tech-grid {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse 90% 80% at 50% 20%, black 30%, transparent 78%);
+}
+
+.tech-grid-faint {
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* Focus visibility */
+:where(a, button, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-s);
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Thin scrollbars for technical panels */
+.thin-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+/* Theme transition helpers */
+.theme-fade,
+.theme-fade * {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 0.35s;
+  transition-timing-function: ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
